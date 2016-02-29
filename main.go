@@ -18,6 +18,7 @@ func healthHandler(res http.ResponseWriter, req *http.Request) {
 
 func main() {
 	//TODO: query spotify service for one direction information
+	//TODO: insert returned info into postgres
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/healthz", healthHandler)
 	http.ListenAndServe(":8080", nil)
