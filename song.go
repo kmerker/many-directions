@@ -22,7 +22,7 @@ type Track struct {
 //grabs songs from spotify and inserts them into redis
 func getSongs() {
 	//TODO: make request for top tracks to spotify
-	url := "https://api.spotify.com/v1/artists/4AK6F7OLvEQ5QYCBNiQWHq/to-tracks?country=US"
+	url := "https://api.spotify.com/v1/artists/4AK6F7OLvEQ5QYCBNiQWHq/top-tracks?country=US"
 	fmt.Println("about to make a request")
 	res, err := http.Get(url)
 	if err != nil {
