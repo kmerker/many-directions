@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 //forgot what api this belongs too. whoops.
@@ -27,14 +27,13 @@ func getSongs() {
 	res, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println("serializing...")
 	topTracks := Tracks{}
-	if err := json.Unmarshal(body, &topTracks); err != nil {
+	if err := json.NewDecoder(res.Body).Decode(&topTracks); err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 
 	fmt.Printf("%#v", topTracks)
