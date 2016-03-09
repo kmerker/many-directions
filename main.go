@@ -22,6 +22,7 @@ func main() {
 	start()
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/healthz", healthHandler)
+	fmt.Println("serving on port 8080")
 	http.ListenAndServe(":8080", nil)
 }
 
