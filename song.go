@@ -29,6 +29,7 @@ func getSongs() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	fmt.Println("made request, resp code", res.StatusCode)
 	defer res.Body.Close()
 	topTracks := Tracks{}
 	if err := json.NewDecoder(res.Body).Decode(&topTracks); err != nil {
