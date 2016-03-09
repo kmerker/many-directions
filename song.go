@@ -37,5 +37,5 @@ func getSongs() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%#v", topTracks)
+	fmt.Printf("%#v\n", topTracks)
 }
