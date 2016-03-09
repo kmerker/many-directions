@@ -11,7 +11,7 @@ import (
 const ArtistID = "4AK6F7OLvEQ5QYCBNiQWHq"
 
 type Tracks struct {
-	Track []Track
+	Track []Track `json:"tracks"`
 }
 
 type Track struct {
