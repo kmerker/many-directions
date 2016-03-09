@@ -11,24 +11,23 @@ import (
 var redisClient = redis.NewClient(&redis.Options{
 	Addr:     "localhost:6379",
 	Password: "", // no password set
-	DB:       0,  // use default DB
+	DB:       1,
 })
 
 func main() {
-	// call start func which does the below
-	//TODO: query spotify service for one direction information
-	//TODO: insert returned info into redis
-
 	start()
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/healthz", healthHandler)
-	fmt.Println("serving on port 8080")
+	http.HandleFunc("/play", playHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
 func start() {
 	// call service that gets and stores songs
-	getSongs()
+	topTracks := getSongs()
+	for _, track := range topTracks.Tracks {
+		redisClient.Set(track.Title, track.Id, 0)
+	}
 }
 
 func indexHandler(res http.ResponseWriter, req *http.Request) {
@@ -39,4 +38,11 @@ func indexHandler(res http.ResponseWriter, req *http.Request) {
 func healthHandler(res http.ResponseWriter, req *http.Request) {
 	io.WriteString(res, "Puffy is OK!\n")
 	fmt.Println("A health check was performed")
+}
+
+func playHandler(res http.ResponseWriter, req *http.Request) {
+	song, _ := redisClient.RandomKey().Result()
+	io.WriteString(res, "Play \""+song+"\" by One Direction!")
+	fmt.Printf("\nPlay %s by One Direction for us!\n", song)
+
 }
