@@ -9,9 +9,9 @@ import (
 )
 
 var redisClient = redis.NewClient(&redis.Options{
-	Addr:     "localhost:6379",
+	Addr:     "redis:6379",
 	Password: "", // no password set
-	DB:       1,
+	DB:       0,
 })
 
 func main() {
