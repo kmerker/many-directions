@@ -25,7 +25,7 @@ RUN mkdir gohome
 RUN mkdir gohome/src
 RUN mkdir gohome/pkg
 RUN mkdir gohome/bin
-ENV GOPATH=gohome
+ENV GOPATH=/gohome
 
 # Go base template
 COPY . /app
