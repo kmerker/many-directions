@@ -25,6 +25,6 @@ ENV PATH=/opt/bitnami/go/bin:$PATH
 COPY . /app
 WORKDIR /app
 
-ENTRYPOINT /app/many-directions
+ENTRYPOINT /many-directions
 
 EXPOSE 8080
