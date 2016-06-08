@@ -21,14 +21,18 @@ ENV PATH=/opt/bitnami/go/bin:$PATH
 
 # copied in from Michelle's original! it should stay preserved!
 
-COPY . /go/src/github.com/kmerker/many-directions
-
-RUN go get gopkg.in/redis.v3
-RUN go install github.com/kmerker/many-directions
+RUN mkdir gohome
+RUN mkdir gohome/src
+RUN mkdir gohome/pkg
+RUN mkdir gohome/bin
+ENV GOPATH=gohome
 
 # Go base template
 COPY . /app
 WORKDIR /app
+
+RUN go get gopkg.in/redis.v3
+RUN go install github.com/kmerker/many-directions
 
 ENTRYPOINT /go/bin/many-directions
 
