@@ -20,8 +20,11 @@ ENV PATH=/opt/bitnami/go/bin:$PATH
 ## STACKSMITH-END: Modifications below this line will be unchanged when regenerating
 
 # copied in from Michelle's original! it should stay preserved!
+
+COPY . /go/src/github.com/kmerker/many-directions
+
 RUN go get gopkg.in/redis.v3
-RUN go install github.com/michelleN/many-directions
+RUN go install github.com/kmerker/many-directions
 
 # Go base template
 COPY . /app
