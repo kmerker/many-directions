@@ -21,10 +21,8 @@ ENV PATH=/opt/bitnami/go/bin:$PATH
 
 # copied in from Michelle's original! it should stay preserved!
 
-# Go base template
-COPY . /app
-WORKDIR /app
+ADD many-directions /
 
-ENTRYPOINT /many-directions
+CMD ["/many-directions"]
 
 EXPOSE 8080
